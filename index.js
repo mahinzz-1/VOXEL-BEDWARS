@@ -1,4 +1,12 @@
+const http = require('http');
 const { WebSocketServer } = require('ws');
+
+const PORT = process.env.PORT || 19130;
+
+const server = http.createServer((req, res) => {
+    res.writeHead(200);
+    res.end('WebSocket Server Running');
+});
 
 const wss = new WebSocketServer({ port: 19131, host: '127.0.0.1' });
 const players = {};
