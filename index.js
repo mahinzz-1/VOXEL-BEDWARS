@@ -1,12 +1,4 @@
-const http = require('http');
 const { WebSocketServer } = require('ws');
-
-const PORT = process.env.PORT || 19130;
-
-const server = http.createServer((req, res) => {
-    res.writeHead(200);
-    res.end('WebSocket Server Running');
-});
 
 const wss = new WebSocketServer({ server });
 
@@ -137,12 +129,12 @@ wss.on('connection', (ws) => {
                         if (bx === 0 && (bz === -33 || bz === -34)) {
                             if (blueBedAlive) {
                                 blueBedAlive = false;
-                                broadcast({ type: 'PlayerSendMessage', id: 'system', name: 'SYSTEM', message: 'Blue Bed has been destroyed!' });
+                                broadcast({ type: 'PlayerNotify', message: 'Blue Bed has been destroyed!' });
                             }
                         } else if (bx === 0 && (bz === 33 || bz === 34)) {
                             if (redBedAlive) {
                                 redBedAlive = false;
-                                broadcast({ type: 'PlayerSendMessage', id: 'system', name: 'SYSTEM', message: 'Red Bed has been destroyed!' });
+                                broadcast({ type: 'PlayerNotify', message: 'Red Bed has been destroyed!' });
                             }
                         }
                     }
@@ -197,9 +189,7 @@ wss.on('connection', (ws) => {
                                 });
                             }
                             broadcast({
-                                type: 'PlayerSendMessage',
-                                id: 'system',
-                                name: 'SYSTEM',
+                                type: 'PlayerNotify',
                                 message: `${attacker.name} killed ${target.name}!`
                             });
                         } else {
