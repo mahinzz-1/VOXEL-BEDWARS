@@ -1,5 +1,12 @@
 const { WebSocketServer } = require('ws');
 
+const http = require('http');
+
+const server = http.createServer((req, res) => {
+    res.writeHead(200);
+    res.end('BedWars Server Running');
+});
+
 const wss = new WebSocketServer({ server });
 
 const players = {};
