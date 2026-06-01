@@ -1,10 +1,11 @@
+const http = require('http');
 const { WebSocketServer } = require('ws');
 
-const http = require('http');
+const PORT = process.env.PORT || 19130;
 
 const server = http.createServer((req, res) => {
     res.writeHead(200);
-    res.end('BedWars Server Running');
+    res.end('BedWars Game Server Running');
 });
 
 const wss = new WebSocketServer({ server });
