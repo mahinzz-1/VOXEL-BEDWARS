@@ -8,7 +8,8 @@ const server = http.createServer((req, res) => {
     res.end('WebSocket Server Running');
 });
 
-const wss = new WebSocketServer({ port: 19131, host: '127.0.0.1' });
+const wss = new WebSocketServer({ server });
+
 const players = {};
 const world = {};
 let redBedAlive = true;
@@ -274,4 +275,6 @@ setInterval(() => {
     broadcast(tickData);
 }, 50);
 
-console.log('BedWars Game Server running on ws://127.0.0.1:19131');
+server.listen(PORT, '0.0.0.0', () => {
+    console.log(`BedWars Game Server running on port ${PORT}`);
+});
